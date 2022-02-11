@@ -1,0 +1,61 @@
+package com.projeto.vendas.domain;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
+
+@Entity
+public class ItensVenda implements Serializable {
+	private static final long serialVersionUID = 1L;	
+	
+	@EmbeddedId
+	ItensVendaPK id = new ItensVendaPK();
+	
+	private BigDecimal desconto;
+	private Integer quantidade;
+	private BigDecimal preco;
+	
+	//Descontos aqui !
+	
+	public ItensVenda() {
+	}
+
+	public ItensVenda(BigDecimal desconto, Integer quantidade, BigDecimal preco) {
+		super();
+		this.desconto = desconto;
+		this.quantidade = quantidade;
+		this.preco = preco;
+	}
+
+	public BigDecimal getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(BigDecimal desconto) {
+		this.desconto = desconto;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
+
+	
+	
+	
+	
+}
