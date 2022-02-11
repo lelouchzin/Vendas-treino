@@ -14,40 +14,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.projeto.vendas.domain.Venda;
-import com.projeto.vendas.services.VendaService;
+import com.projeto.vendas.domain.Produtos;
+import com.projeto.vendas.services.ProdutoService;
 
 @RestController
-@RequestMapping(value="/vendas")
-public class VendaResource {
+@RequestMapping(value="/produtos")
+public class ProdutoResource {
 
 	@Autowired 
-	private VendaService service;
+	private ProdutoService service;
 
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Venda> find(@PathVariable Integer id) {
-		Venda obj = service.find(id);
+	public ResponseEntity<Produtos> find(@PathVariable Integer id) {
+		Produtos obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody Venda objDto, @PathVariable Integer id) {
-		Venda obj = service.insert(objDto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody Produtos objDto, @PathVariable Integer id) {
+		Produtos obj = service.insert(objDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Venda>> findAll() {
-		List<Venda> list = service.findAll();
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity <List<Produtos>> findAll(){
+		List<Produtos> list = service.findAll();
 		return ResponseEntity.ok().body(list);
-		}
-	
-	
-	
+	}
 	
 }
