@@ -27,7 +27,7 @@ public class Venda implements Serializable {
 	private Integer id;
 	private LocalDateTime momentoVenda;
 
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "vendas")
 	private List<Produtos> produto = new ArrayList<>();
 
@@ -49,6 +49,7 @@ public class Venda implements Serializable {
 		this.momentoVenda = momentoVenda;
 		this.vendedor = vendedor;
 	}
+	
 
 
 	public Integer getId() {

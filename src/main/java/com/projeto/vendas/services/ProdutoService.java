@@ -31,6 +31,12 @@ public class ProdutoService {
 	public List<Produtos> findAll() {
 		return repo.findAll();
 	}
+
+	public void delete(Integer id) {
+		find(id);
+		repo.deleteById(id);
+		
+	}
 	
 	
 	

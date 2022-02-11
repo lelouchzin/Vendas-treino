@@ -3,10 +3,13 @@ package com.projeto.vendas.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projeto.vendas.domain.Vendedor;
+import com.projeto.vendas.dto.VendedorDTO;
 import com.projeto.vendas.repositories.VendedorRepository;
 import com.projeto.vendas.services.exceptions.ObjectNotFoundException;
 
@@ -23,13 +26,27 @@ public class VendedorService {
 
 	}
 	
+	
+	@Transactional
 	public Vendedor insert(Vendedor obj) {
 		obj.setId(null);
-		return repo.save(obj);
+		repo.save(obj);
+		System.out.println(obj);
+		return  obj;
 	}
 
 	public List<Vendedor> findAll() {
 		return repo.findAll();
+	}
+
+
+	public Vendedor fromDTO(VendedorDTO objDto) {
+		return new Vendedor(objDto.getId(), objDto.getNomeVendedor());
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		repo.deleteById(id);
 	}
 	
 	

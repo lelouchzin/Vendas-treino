@@ -18,6 +18,7 @@ public class ItensVenda implements Serializable {
 	private BigDecimal desconto;
 	private Integer quantidade;
 	private BigDecimal preco;
+
 	
 	//Descontos aqui !
 	

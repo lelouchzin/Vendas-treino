@@ -1,6 +1,5 @@
 package com.projeto.vendas.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ public class VendaService {
 	private VendaRepository repo;
 
 	@Autowired
-	private ProdutosRepository proRepo;
+	private ProdutosRepository produtosRepository;
 
 	public Venda find(Integer id) {
 		Optional<Venda> obj = repo.findById(id);
@@ -28,29 +27,30 @@ public class VendaService {
 				"Objeto não encontrado! id: " + id + ", Tipo: " + Venda.class.getName(), null));
 	}
 
-	public Venda insert(Venda obj) {
-		Venda novaVenda = new Venda(null, null, obj.getVendedor());
-		obj.setMomentoCompra(LocalDateTime.now());
-		obj.setVendedor(obj.getVendedor());
-		repo.save(novaVenda);
-		proRepo.saveAll(obj.getProduto());
-		return obj;
-	}
+//	public Venda insert(Venda obj) {
+//		obj.setId(null);
+//		obj.getMomentoVenda();
+//		LocalDateTime.now();
+//		return repo.save(obj);
+//	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public List<Venda> findAll() {
 		return repo.findAll();
 	}
-	
-	
+
+	public void delete(Integer id) {
+		find(id);
+		repo.deleteById(id);
+	}
+
+//	public Venda fromDTO(VendaNewDTO objDto) {
+//		objDto.getMomentoVenda();
+//		Venda venda = new Venda(null, LocalDateTime.now(), objDto.getVendedor());
+//		for (Produtos pro : objDto.getProduto()) {
+//			pro.setVendas(venda);
+//			produtosRepository.save(pro);
+//		}
+//		return venda;
+//	}
+
 }

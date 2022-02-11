@@ -2,6 +2,7 @@ package com.projeto.vendas;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -35,12 +36,13 @@ public class VendasApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		Vendedor vend = new Vendedor(null, "Carlos");
+		Produtos prod1 = new Produtos(null, "Mouse", BigDecimal.valueOf(100));
+		Produtos prod2 = new Produtos(null, "teclado", BigDecimal.valueOf(200));
 		Venda venda = new Venda(null, LocalDateTime.now(), vend);
-		Produtos prod = new Produtos(null, "Mouse", BigDecimal.valueOf(100));
 		
-		venda.getProduto().add(prod);
+		venda.getProduto().addAll(Arrays.asList(prod1, prod2));
 		
-		produtoRepository.save(prod);
+		produtoRepository.saveAll(Arrays.asList(prod1, prod2));
 		vendedorRepository.save(vend);
 		vendaRepository.save(venda);
 		
