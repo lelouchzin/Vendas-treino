@@ -25,6 +25,10 @@ public class Produtos implements Serializable {
 	@JoinColumn(name ="vendas_id")
 	private Venda vendas;
 	
+	@ManyToOne
+	@JoinColumn(name = "itens_id")
+	private ItensVendaPK itensVendaPK;
+	
 	
 	public Produtos() {
 	}
@@ -35,6 +39,16 @@ public class Produtos implements Serializable {
 		this.id = id;
 		this.nomeProduto = nomeProduto;
 		this.valorProduto = valorProduto;
+	}
+
+
+	public ItensVendaPK getItensVendaPK() {
+		return itensVendaPK;
+	}
+
+
+	public void setItensVendaPK(ItensVendaPK itensVendaPK) {
+		this.itensVendaPK = itensVendaPK;
 	}
 
 

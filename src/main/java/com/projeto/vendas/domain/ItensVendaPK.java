@@ -1,29 +1,32 @@
 package com.projeto.vendas.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Embeddable
 public class ItensVendaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne
-	@JoinColumn(name="produto_id")
-	private Produtos produto;
+	@OneToMany(mappedBy = "itensVendaPK")
+	private List<Produtos> produto;
 	
 	@ManyToOne
 	@JoinColumn(name="venda_id")
 	private Venda venda;
 
-	public Produtos getProduto() {
+
+
+	public List<Produtos> getProduto() {
 		return produto;
 	}
 
-	public void setProduto(Produtos produto) {
+	public void setProduto(List<Produtos> produto) {
 		this.produto = produto;
 	}
 
