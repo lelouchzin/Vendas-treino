@@ -2,7 +2,11 @@ package com.projeto.vendas.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produtos implements Serializable {
@@ -25,9 +32,9 @@ public class Produtos implements Serializable {
 	@JoinColumn(name ="vendas_id")
 	private Venda vendas;
 	
-	@ManyToOne
-	@JoinColumn(name = "itens_id")
-	private ItensVendaPK itensVendaPK;
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItensVenda> itens = new HashSet<>();
 	
 	
 	public Produtos() {
@@ -41,14 +48,24 @@ public class Produtos implements Serializable {
 		this.valorProduto = valorProduto;
 	}
 
+	//nao faz sentido ????
+	@JsonIgnore
+	public List<Venda> getVenda() {
+		List<Venda> list = new ArrayList<>();
+		for(ItensVenda x : itens) {
+			list.add(x.getVenda());
+		}
+		return list;
+	}
+	
 
-	public ItensVendaPK getItensVendaPK() {
-		return itensVendaPK;
+	public Set<ItensVenda> getItens() {
+		return itens;
 	}
 
 
-	public void setItensVendaPK(ItensVendaPK itensVendaPK) {
-		this.itensVendaPK = itensVendaPK;
+	public void setItens(Set<ItensVenda> itens) {
+		this.itens = itens;
 	}
 
 

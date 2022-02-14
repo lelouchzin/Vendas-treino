@@ -7,30 +7,53 @@ import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ItensVenda implements Serializable {
-	private static final long serialVersionUID = 1L;	
-	
+	private static final long serialVersionUID = 1L;
+
+	@JsonIgnore
 	@EmbeddedId
 	ItensVendaPK id = new ItensVendaPK();
-	
+
 	private BigDecimal desconto;
 	private Integer quantidade;
 	private BigDecimal preco;
 
-	
-	//Descontos aqui !
-	
 	public ItensVenda() {
 	}
 
-	public ItensVenda(BigDecimal desconto, Integer quantidade, BigDecimal preco) {
+	public ItensVenda(BigDecimal desconto, Integer quantidade, BigDecimal preco, Produtos produto, Venda venda) {
 		super();
+		id.setVenda(venda);
+		id.setProduto(produto);
 		this.desconto = desconto;
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
+	
+	
+	
+	public ItensVendaPK getId() {
+		return id;
+	}
+
+	public void setId(ItensVendaPK id) {
+		this.id = id;
+	}
+
+	@JsonIgnore
+	public Venda getVenda() {
+		return id.getVenda();
+	}
+	
+	
+	public Produtos getProduto() {
+		return id.getProduto();
+	}
+	
+	//fazer um desconto
 
 	public BigDecimal getDesconto() {
 		return desconto;
@@ -72,7 +95,7 @@ public class ItensVenda implements Serializable {
 		ItensVenda other = (ItensVenda) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
+
+	// colocar um to String para retorna os produtos
+
 }

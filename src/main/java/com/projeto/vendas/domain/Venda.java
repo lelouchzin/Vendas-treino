@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,11 @@ public class Venda implements Serializable {
 	private LocalDateTime momentoVenda;
 
 	
+	public void setMomentoVenda(LocalDateTime momentoVenda) {
+		this.momentoVenda = momentoVenda;
+	}
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "vendas")
 	private List<Produtos> produto = new ArrayList<>();
 
@@ -35,9 +41,17 @@ public class Venda implements Serializable {
 	@JoinColumn(name= "vendedor_id")
 	private Vendedor vendedor;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "id.venda")
 	private Set<ItensVenda> itensVenda = new HashSet<>();
+	
+	
+	@Override
+	public String toString() {
+		return "Venda [id=" + id + ", momentoVenda=" + momentoVenda + ", produto=" + produto + ", vendedor=" + vendedor
+				+ ", itensVenda=" + itensVenda + "]";
+	}
+
 
 	public Venda() {
 	}
@@ -48,7 +62,8 @@ public class Venda implements Serializable {
 		this.id = id;
 		this.momentoVenda = momentoVenda;
 		this.vendedor = vendedor;
-	}
+	}	
+	
 	
 
 
