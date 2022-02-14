@@ -48,13 +48,14 @@ public class VendasApplication implements CommandLineRunner{
 		Venda venda = new Venda(null, LocalDateTime.now(), vend);
 		
 		
-		ItensVenda iv1 = new ItensVenda(BigDecimal.valueOf(0), 1, BigDecimal.valueOf(100), prod1, venda);
-		ItensVenda iv2 = new ItensVenda(BigDecimal.valueOf(0), 1, BigDecimal.valueOf(200), prod2, venda);
+		ItensVenda iv1 = new ItensVenda(BigDecimal.valueOf(0), 2, BigDecimal.valueOf(100), prod1, venda);
+		ItensVenda iv2 = new ItensVenda(BigDecimal.valueOf(0), 4, BigDecimal.valueOf(200), prod2, venda);
 		
 		venda.getItensVenda().addAll(Arrays.asList(iv1, iv2));
 		
 		prod1.getItens().addAll(Arrays.asList(iv1));
 		prod2.getItens().addAll(Arrays.asList(iv2));
+		
 		
 		venda.getProduto().addAll(Arrays.asList(prod1, prod2));
 		

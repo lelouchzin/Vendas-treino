@@ -1,6 +1,7 @@
 package com.projeto.vendas.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -65,6 +65,13 @@ public class Venda implements Serializable {
 	}	
 	
 	
+	public BigDecimal getValorTotal() {
+		BigDecimal soma = BigDecimal.valueOf(0);
+		for(ItensVenda iv : itensVenda) {
+			soma = soma.add(iv.getSubTotal());
+		}
+		return soma;
+	}
 
 
 	public Integer getId() {

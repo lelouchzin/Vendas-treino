@@ -48,7 +48,7 @@ public class Produtos implements Serializable {
 		this.valorProduto = valorProduto;
 	}
 
-	//nao faz sentido ????
+	
 	@JsonIgnore
 	public List<Venda> getVenda() {
 		List<Venda> list = new ArrayList<>();
