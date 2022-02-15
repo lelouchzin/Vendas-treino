@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.vendas.domain.Produtos;
+import com.projeto.vendas.domain.Vendedor;
+import com.projeto.vendas.dto.ProdutosDTO;
+import com.projeto.vendas.dto.VendedorDTO;
 import com.projeto.vendas.services.ProdutoService;
 
 @RestController
@@ -50,6 +53,14 @@ public class ProdutoResource {
 	public ResponseEntity <List<Produtos>> findAll(){
 		List<Produtos> list = service.findAll();
 		return ResponseEntity.ok().body(list);
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody ProdutosDTO objDto, @PathVariable Integer id) {
+		Produtos obj = service.fromDTO(objDto);
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 	
 }

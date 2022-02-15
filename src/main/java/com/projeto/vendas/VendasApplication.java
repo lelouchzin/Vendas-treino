@@ -1,6 +1,5 @@
 package com.projeto.vendas;
 
-import java.awt.event.ItemEvent;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -10,7 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 import com.projeto.vendas.domain.ItensVenda;
 import com.projeto.vendas.domain.Produtos;
 import com.projeto.vendas.domain.Venda;

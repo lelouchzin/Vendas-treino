@@ -27,7 +27,6 @@ public class VendaDTO {
 		id = obj.getId();
 		momentoVenda = obj.getMomentoVenda();
 		vendedor = obj.getVendedor();
-		produto = obj.getProduto();
 	}
 	
 

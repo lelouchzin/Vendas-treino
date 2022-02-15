@@ -4,9 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.projeto.vendas.domain.Vendedor;
 import com.projeto.vendas.dto.VendedorDTO;
@@ -51,7 +57,16 @@ public class VendedorService {
 	
 	
 	
-	
+	public Vendedor update(Vendedor obj) {
+		Vendedor newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+
+
+	private void updateData(Vendedor newObj, Vendedor obj) {
+		newObj.setNomeVendedor(obj.getNomeVendedor());
+	}
 	
 	
 	

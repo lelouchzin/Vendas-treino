@@ -10,7 +10,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projeto.vendas.domain.ItensVenda;
 import com.projeto.vendas.domain.Produtos;
 import com.projeto.vendas.domain.Venda;
 import com.projeto.vendas.domain.Vendedor;
@@ -40,21 +39,12 @@ public class VendaService {
 				"Objeto não encontrado! id: " + id + ", Tipo: " + Venda.class.getName(), null));
 	}
 
-//	@Transactional
-//	public Venda insert(VendaNewDTO obj) {
-//		obj.getMomentoVenda();
-//		Vendedor vendedor = new Vendedor(obj.getVendedorid(), null);
-//		Venda venda = new Venda(null, LocalDateTime.now(), vendedor);
-//		for(Produtos pro : obj.getProduto()) {
-//			Produtos novo = new Produtos();
-//			novo.setItens(null);
-//			
-//		
-//			
-//		}
-//		return repo.save(venda);
-//
-//	}
+	@Transactional
+	public Venda insert(Venda obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
+	
 
 	public List<Venda> findAll() {
 		return repo.findAll();
@@ -64,6 +54,7 @@ public class VendaService {
 		find(id);
 		repo.deleteById(id);
 	}
-
+	
+	
 
 }

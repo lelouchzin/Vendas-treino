@@ -54,5 +54,13 @@ public class VendedorResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody VendedorDTO objDto, @PathVariable Integer id) {
+		Vendedor obj = service.fromDTO(objDto);
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
 	
 }
