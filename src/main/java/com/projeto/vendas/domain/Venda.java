@@ -28,51 +28,40 @@ public class Venda implements Serializable {
 	private Integer id;
 	private LocalDateTime momentoVenda;
 
-	
-	public void setMomentoVenda(LocalDateTime momentoVenda) {
-		this.momentoVenda = momentoVenda;
-	}
-
 	@JsonIgnore
 	@OneToMany(mappedBy = "vendas")
 	private List<Produtos> produto = new ArrayList<>();
 
 	@ManyToOne
-	@JoinColumn(name= "vendedor_id")
+	@JoinColumn(name = "vendedor_id")
 	private Vendedor vendedor;
-	
-	
+
 	@OneToMany(mappedBy = "id.venda")
 	private Set<ItensVenda> itensVenda = new HashSet<>();
-	
-	
+
 	@Override
 	public String toString() {
 		return "Venda [id=" + id + ", momentoVenda=" + momentoVenda + ", produto=" + produto + ", vendedor=" + vendedor
 				+ ", itensVenda=" + itensVenda + "]";
 	}
 
-
 	public Venda() {
 	}
-
 
 	public Venda(Integer id, LocalDateTime momentoVenda, Vendedor vendedor) {
 		super();
 		this.id = id;
 		this.momentoVenda = momentoVenda;
 		this.vendedor = vendedor;
-	}	
-	
-	
+	}
+
 	public BigDecimal getValorTotal() {
 		BigDecimal soma = BigDecimal.valueOf(0);
-		for(ItensVenda iv : itensVenda) {
+		for (ItensVenda iv : itensVenda) {
 			soma = soma.add(iv.getSubTotal());
 		}
 		return soma;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -82,12 +71,11 @@ public class Venda implements Serializable {
 		this.id = id;
 	}
 
-
 	public LocalDateTime getMomentoVenda() {
 		return momentoVenda;
 	}
 
-	public void setMomentoCompra(LocalDateTime momentoVenda) {
+	public void setMomentoVenda(LocalDateTime momentoVenda) {
 		this.momentoVenda = momentoVenda;
 	}
 
@@ -131,9 +119,5 @@ public class Venda implements Serializable {
 		Venda other = (Venda) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
 
 }

@@ -14,6 +14,7 @@ import com.projeto.vendas.domain.Produtos;
 import com.projeto.vendas.domain.Venda;
 import com.projeto.vendas.domain.Vendedor;
 import com.projeto.vendas.dto.ProdutosDTO;
+import com.projeto.vendas.dto.VendaDTO;
 import com.projeto.vendas.dto.VendaNewDTO;
 import com.projeto.vendas.repositories.ItensVendaRepository;
 import com.projeto.vendas.repositories.ProdutosRepository;
@@ -24,13 +25,12 @@ public class VendaService {
 
 	@Autowired
 	private VendaRepository repo;
-	
+
 	@Autowired
 	private ItensVendaRepository itensRepo;
-	
-	@Autowired 
-	private ProdutosRepository proRepo;
 
+	@Autowired
+	private ProdutosRepository proRepo;
 
 	public Venda find(Integer id) {
 		Optional<Venda> obj = repo.findById(id);
@@ -44,7 +44,6 @@ public class VendaService {
 		obj.setId(null);
 		return repo.save(obj);
 	}
-	
 
 	public List<Venda> findAll() {
 		return repo.findAll();
@@ -54,7 +53,16 @@ public class VendaService {
 		find(id);
 		repo.deleteById(id);
 	}
-	
-	
+
+	public Venda fromDto(VendaNewDTO objDto) {
+		Vendedor vende = new Vendedor(objDto.getVendedorid(), null);
+		objDto.getMomentoVenda();
+		Venda venda = new Venda(null, LocalDateTime.now(), vende);
+		repo.save(venda);
+		
+		return venda;
+				
+				
+	}
 
 }

@@ -4,15 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.projeto.vendas.domain.Vendedor;
 import com.projeto.vendas.dto.VendedorDTO;
@@ -31,45 +25,36 @@ public class VendedorService {
 				"Objeto não encontrado! Id: " + id + ", Tipo:" + Vendedor.class.getName()));
 
 	}
-	
-	
+
 	@Transactional
 	public Vendedor insert(Vendedor obj) {
 		obj.setId(null);
 		repo.save(obj);
 		System.out.println(obj);
-		return  obj;
+		return obj;
 	}
 
 	public List<Vendedor> findAll() {
 		return repo.findAll();
 	}
 
-
 	public Vendedor fromDTO(VendedorDTO objDto) {
 		return new Vendedor(objDto.getId(), objDto.getNomeVendedor());
 	}
-	
+
 	public void delete(Integer id) {
 		find(id);
 		repo.deleteById(id);
 	}
-	
-	
-	
+
 	public Vendedor update(Vendedor obj) {
 		Vendedor newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return repo.save(newObj);
 	}
 
-
 	private void updateData(Vendedor newObj, Vendedor obj) {
 		newObj.setNomeVendedor(obj.getNomeVendedor());
 	}
-	
-	
-	
 
-	
 }

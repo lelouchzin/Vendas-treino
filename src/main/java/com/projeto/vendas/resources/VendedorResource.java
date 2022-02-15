@@ -19,20 +19,18 @@ import com.projeto.vendas.dto.VendedorDTO;
 import com.projeto.vendas.services.VendedorService;
 
 @RestController
-@RequestMapping(value="/vendedores")
+@RequestMapping(value = "/vendedores")
 public class VendedorResource {
 
-	@Autowired 
+	@Autowired
 	private VendedorService service;
 
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Vendedor> find(@PathVariable Integer id) {
 		Vendedor obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody VendedorDTO objDto) {
 		Vendedor obj = service.fromDTO(objDto);
@@ -40,27 +38,25 @@ public class VendedorResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Vendedor>> findAll() {
 		List<Vendedor> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody VendedorDTO objDto, @PathVariable Integer id) {
 		Vendedor obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
+
 }

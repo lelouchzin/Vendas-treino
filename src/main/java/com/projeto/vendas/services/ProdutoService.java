@@ -25,8 +25,7 @@ public class ProdutoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo:" + Produtos.class.getName()));
 
 	}
-	
-	
+
 	public Produtos insert(Produtos obj) {
 		obj.setId(null);
 		return repo.save(obj);
@@ -39,29 +38,23 @@ public class ProdutoService {
 	public void delete(Integer id) {
 		find(id);
 		repo.deleteById(id);
-		
+
 	}
-	
+
 	public Produtos update(Produtos obj) {
 		Produtos newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return repo.save(newObj);
 	}
 
-
 	private void updateData(Produtos newObj, Produtos obj) {
 		newObj.setNomeProduto(obj.getNomeProduto());
 		newObj.setValorProduto(obj.getValorProduto());
 	}
 
-
 	public Produtos fromDTO(@Valid ProdutosDTO objDto) {
 		return new Produtos(objDto.getId(), objDto.getNomeProduto(), objDto.getValorProduto());
-		
+
 	}
-	
-	
-	
-	
-	
+
 }

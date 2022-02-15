@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.vendas.domain.Produtos;
-import com.projeto.vendas.domain.Vendedor;
 import com.projeto.vendas.dto.ProdutosDTO;
-import com.projeto.vendas.dto.VendedorDTO;
 import com.projeto.vendas.services.ProdutoService;
 
 @RestController
