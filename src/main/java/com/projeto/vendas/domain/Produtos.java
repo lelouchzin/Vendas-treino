@@ -28,8 +28,8 @@ public class Produtos implements Serializable {
 	private String nomeProduto;
 	private BigDecimal valorProduto;
 	
+	
 	@ManyToOne
-	@JoinColumn(name ="vendas_id")
 	private Venda vendas;
 	
 	@JsonIgnore

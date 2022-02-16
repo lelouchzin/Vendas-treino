@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,9 +30,10 @@ public class Venda implements Serializable {
 	private LocalDateTime momentoVenda;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "vendas")
+	@OneToMany(mappedBy = "vendas", cascade = CascadeType.REMOVE)
 	private List<Produtos> produto = new ArrayList<>();
 
+	
 	@ManyToOne
 	@JoinColumn(name = "vendedor_id")
 	private Vendedor vendedor;

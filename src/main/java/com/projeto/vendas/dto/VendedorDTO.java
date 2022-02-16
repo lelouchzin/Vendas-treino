@@ -20,7 +20,6 @@ public class VendedorDTO {
 	public VendedorDTO(Vendedor obj) {
 		id = obj.getId();
 		nomeVendedor = obj.getNomeVendedor();
-		vendas = obj.getVendas();
 	}
 
 	public Integer getId() {

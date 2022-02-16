@@ -59,7 +59,7 @@ public class ItensVenda implements Serializable {
 		return id.getVenda();
 	}
 	
-	
+	@JsonIgnore
 	public Produtos getProduto() {
 		return id.getProduto();
 	}
