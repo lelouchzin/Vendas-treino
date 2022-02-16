@@ -21,13 +21,6 @@ public class ItensVenda implements Serializable {
 	private Integer quantidade;
 	private BigDecimal preco;
 
-
-	@Override
-	public String toString() {
-		return "ItensVenda [id=" + id + ", desconto=" + desconto + ", quantidade=" + quantidade + ", preco=" + preco
-				+ "]";
-	}
-
 	public ItensVenda() {
 	}
 
@@ -102,5 +95,4 @@ public class ItensVenda implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	
 }

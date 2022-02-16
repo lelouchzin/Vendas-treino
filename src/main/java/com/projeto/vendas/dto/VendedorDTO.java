@@ -7,13 +7,11 @@ import com.projeto.vendas.domain.Venda;
 import com.projeto.vendas.domain.Vendedor;
 
 public class VendedorDTO {
-	
-	
+
 	private Integer id;
 	private String nomeVendedor;
 	private List<Venda> vendas = new ArrayList<>();
-	
-	
+
 	public VendedorDTO() {
 	}
 
@@ -26,32 +24,24 @@ public class VendedorDTO {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public String getNomeVendedor() {
 		return nomeVendedor;
 	}
 
-
 	public void setNomeVendedor(String nomeVendedor) {
 		this.nomeVendedor = nomeVendedor;
 	}
-
 
 	public List<Venda> getVendas() {
 		return vendas;
 	}
 
-
 	public void setVendas(List<Venda> vendas) {
 		this.vendas = vendas;
 	}
-	
-	
-	
 
 }

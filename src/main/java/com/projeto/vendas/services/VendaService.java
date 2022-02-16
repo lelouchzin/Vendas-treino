@@ -16,7 +16,6 @@ import com.projeto.vendas.domain.Vendedor;
 import com.projeto.vendas.dto.ProdutosDTO;
 import com.projeto.vendas.dto.VendaDTO;
 import com.projeto.vendas.dto.VendaNewDTO;
-import com.projeto.vendas.repositories.ItensVendaRepository;
 import com.projeto.vendas.repositories.ProdutosRepository;
 import com.projeto.vendas.repositories.VendaRepository;
 
@@ -25,9 +24,6 @@ public class VendaService {
 
 	@Autowired
 	private VendaRepository repo;
-
-	@Autowired
-	private ItensVendaRepository itensRepo;
 
 	@Autowired
 	private ProdutosRepository proRepo;
@@ -49,7 +45,8 @@ public class VendaService {
 			Produtos novo = new Produtos(pro);
 			novo.setVendas(venda);
 			proRepo.save(novo);
-		}
+		}	
+		System.out.println(venda);
 		return venda;
 	}
 

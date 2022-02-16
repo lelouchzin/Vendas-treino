@@ -30,7 +30,6 @@ public class VendedorService {
 	public Vendedor insert(Vendedor obj) {
 		obj.setId(null);
 		repo.save(obj);
-		System.out.println(obj);
 		return obj;
 	}
 

@@ -49,5 +49,7 @@ public class VendaNewDTO {
 	public void setItensVenda(Set<ItensVenda> itensVenda) {
 		this.itensVenda = itensVenda;
 	}
+	
+	
 
 }
