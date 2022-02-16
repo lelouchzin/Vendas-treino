@@ -12,34 +12,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projeto.vendas.dto.ProdutosDTO;
 
 @Entity
 public class Produtos implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nomeProduto;
 	private BigDecimal valorProduto;
-	
-	
+
 	@ManyToOne
 	private Venda vendas;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItensVenda> itens = new HashSet<>();
-	
-	
+
 	public Produtos() {
 	}
-
 
 	public Produtos(Integer id, String nomeProduto, BigDecimal valorProduto) {
 		super();
@@ -48,72 +45,65 @@ public class Produtos implements Serializable {
 		this.valorProduto = valorProduto;
 	}
 
-	
+	public Produtos(ProdutosDTO obj) {
+		this.id = null;
+		this.nomeProduto = obj.getNomeProduto();
+		this.valorProduto = obj.getValorProduto();
+	}
+
 	@JsonIgnore
 	public List<Venda> getVenda() {
 		List<Venda> list = new ArrayList<>();
-		for(ItensVenda x : itens) {
+		for (ItensVenda x : itens) {
 			list.add(x.getVenda());
 		}
 		return list;
 	}
-	
 
 	public Set<ItensVenda> getItens() {
 		return itens;
 	}
 
-
 	public void setItens(Set<ItensVenda> itens) {
 		this.itens = itens;
 	}
-
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
 
-
 	public void setNomeProduto(String nomeProduto) {
 		this.nomeProduto = nomeProduto;
 	}
-
 
 	public BigDecimal getValorProduto() {
 		return valorProduto;
 	}
 
-
 	public void setValorProduto(BigDecimal valorProduto) {
 		this.valorProduto = valorProduto;
 	}
-
 
 	public Venda getVendas() {
 		return vendas;
 	}
 
-
 	public void setVendas(Venda vendas) {
 		this.vendas = vendas;
 	}
-
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -126,7 +116,5 @@ public class Produtos implements Serializable {
 		Produtos other = (Produtos) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
 }

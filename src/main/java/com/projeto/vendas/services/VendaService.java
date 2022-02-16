@@ -10,8 +10,10 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projeto.vendas.domain.Produtos;
 import com.projeto.vendas.domain.Venda;
 import com.projeto.vendas.domain.Vendedor;
+import com.projeto.vendas.dto.ProdutosDTO;
 import com.projeto.vendas.dto.VendaDTO;
 import com.projeto.vendas.dto.VendaNewDTO;
 import com.projeto.vendas.repositories.ItensVendaRepository;
@@ -38,9 +40,17 @@ public class VendaService {
 	}
 
 	@Transactional
-	public Venda insert(Venda obj) {
-		obj.setId(null);
-		return repo.save(obj);
+	public Venda insert(VendaNewDTO obj) {
+		Vendedor vende = new Vendedor(obj.getVendedorid(), null);
+		obj.getMomentoVenda();
+		Venda venda = new Venda(null, LocalDateTime.now(), vende);
+		repo.save(venda);
+		for (ProdutosDTO pro : obj.getProduto()) {
+			Produtos novo = new Produtos(pro);
+			novo.setVendas(venda);
+			proRepo.save(novo);
+		}
+		return venda;
 	}
 
 	public List<Venda> findAll() {
@@ -52,18 +62,6 @@ public class VendaService {
 		repo.deleteById(id);
 	}
 
-	
-//	terminar amanha, falar com o adriano
-	public Venda fromDto(VendaNewDTO obj) {
-		Vendedor vende = new Vendedor(obj.getVendedorid(), null);
-		obj.getMomentoVenda();
-		Venda venda = new Venda(null, LocalDateTime.now(), vende);
-		repo.save(venda);
-//		fazer um for para salvar os prod mas tenho q salvar no itens, como ?????
-
-		return venda;
-	}
-	
 	public Venda fromDto(VendaDTO objDto) {
 		return new Venda(objDto.getId(), objDto.getMomentoVenda(), objDto.getVendedor());
 	}

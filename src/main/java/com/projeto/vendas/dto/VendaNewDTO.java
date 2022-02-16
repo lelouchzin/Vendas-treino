@@ -7,12 +7,11 @@ import java.util.List;
 import java.util.Set;
 
 import com.projeto.vendas.domain.ItensVenda;
-import com.projeto.vendas.domain.Produtos;
 
 public class VendaNewDTO {
 
 	private LocalDateTime momentoVenda;
-	private List<Produtos> produto = new ArrayList<>();
+	private List<ProdutosDTO> produto = new ArrayList<>();
 	private Integer vendedorid;
 	private Set<ItensVenda> itensVenda = new HashSet<>();
 
@@ -27,11 +26,11 @@ public class VendaNewDTO {
 		this.momentoVenda = momentoVenda;
 	}
 
-	public List<Produtos> getProduto() {
+	public List<ProdutosDTO> getProduto() {
 		return produto;
 	}
 
-	public void setProduto(List<Produtos> produto) {
+	public void setProduto(List<ProdutosDTO> produto) {
 		this.produto = produto;
 	}
 

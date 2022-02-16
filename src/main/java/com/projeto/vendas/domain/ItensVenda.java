@@ -20,8 +20,7 @@ public class ItensVenda implements Serializable {
 	private BigDecimal desconto;
 	private Integer quantidade;
 	private BigDecimal preco;
-	
-	
+
 
 	@Override
 	public String toString() {
@@ -40,12 +39,11 @@ public class ItensVenda implements Serializable {
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
-	
+
 	public BigDecimal getSubTotal() {
 		return (preco.subtract(desconto).multiply(BigDecimal.valueOf(quantidade)));
 	}
-	
-	
+
 	public ItensVendaPK getId() {
 		return id;
 	}
@@ -58,12 +56,10 @@ public class ItensVenda implements Serializable {
 	public Venda getVenda() {
 		return id.getVenda();
 	}
-	
-	@JsonIgnore
+
 	public Produtos getProduto() {
 		return id.getProduto();
 	}
-	
 
 	public BigDecimal getDesconto() {
 		return desconto;
@@ -106,6 +102,5 @@ public class ItensVenda implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	// colocar um to String para retorna os produtos
-
+	
 }
