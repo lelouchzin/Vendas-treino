@@ -30,7 +30,7 @@ public class Produtos implements Serializable {
 
 	@JsonIgnore
 	@ManyToOne
-	private Venda vendas;
+	private Venda venda;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
@@ -50,6 +50,7 @@ public class Produtos implements Serializable {
 		this.id = null;
 		this.nomeProduto = obj.getNomeProduto();
 		this.valorProduto = obj.getValorProduto();
+		this.itens = obj.getItens();
 	}
 
 	@JsonIgnore
@@ -94,11 +95,11 @@ public class Produtos implements Serializable {
 	}
 
 	public Venda getVendas() {
-		return vendas;
+		return venda;
 	}
 
-	public void setVendas(Venda vendas) {
-		this.vendas = vendas;
+	public void setVendas(Venda venda) {
+		this.venda = venda;
 	}
 
 	@Override

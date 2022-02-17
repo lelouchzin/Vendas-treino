@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projeto.vendas.domain.ItensVenda;
-import com.projeto.vendas.domain.ItensVendaPK;
 import com.projeto.vendas.domain.Produtos;
 import com.projeto.vendas.domain.Venda;
 import com.projeto.vendas.domain.Vendedor;
@@ -48,14 +47,12 @@ public class VendaService {
 		Venda venda = new Venda(null, LocalDateTime.now(), vende);
 		repo.save(venda);
 		System.out.println(venda);
-
 		for (ProdutosDTO pro : obj.getProduto()) {
 			Produtos novo = new Produtos(pro);
 			novo.setVendas(venda);
 			proRepo.save(novo);
 		}
-
-		System.out.println("Insert method: " + venda);
+		System.out.println("Insert: " + venda);
 		return venda;
 	}
 
@@ -68,8 +65,22 @@ public class VendaService {
 		repo.deleteById(id);
 	}
 
-	public Venda fromDto(VendaDTO objDto) {
+	public Venda update(Venda obj) {
+		Venda newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+
+	private void updateData(Venda newObj, Venda obj) {
+		newObj.setItensVenda(obj.getItensVenda());
+		newObj.setProduto(obj.getProduto());
+	}
+
+
+	public Venda fromDTO(@Valid VendaDTO objDto) {
 		return new Venda(objDto.getId(), objDto.getMomentoVenda(), objDto.getVendedor());
 	}
+
+
 
 }

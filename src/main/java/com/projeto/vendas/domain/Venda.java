@@ -30,7 +30,7 @@ public class Venda implements Serializable {
 	private LocalDateTime momentoVenda;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "vendas", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "venda", cascade = CascadeType.REMOVE)
 	private List<Produtos> produto = new ArrayList<>();
 
 	
@@ -41,11 +41,7 @@ public class Venda implements Serializable {
 	@OneToMany(mappedBy = "id.venda")
 	private Set<ItensVenda> itensVenda = new HashSet<>();
 
-	@Override
-	public String toString() {
-		return "Venda [id=" + id + ", momentoVenda=" + momentoVenda + ", produto=" + produto + ", vendedor=" + vendedor
-				+ ", itensVenda=" + itensVenda + "]";
-	}
+	
 
 	public Venda() {
 	}
@@ -122,4 +118,14 @@ public class Venda implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
+	@Override
+	public String toString() {
+		return "Venda [id=" + id + ", momentoVenda=" + momentoVenda + ", produto=" + produto + ", vendedor=" + vendedor
+				+ ", itensVenda=" + itensVenda + "]";
+	}
+
+	
+	
+	
+	
 }

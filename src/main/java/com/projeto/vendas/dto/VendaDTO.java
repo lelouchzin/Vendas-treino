@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto.vendas.domain.ItensVenda;
 import com.projeto.vendas.domain.Produtos;
 import com.projeto.vendas.domain.Venda;
@@ -15,6 +16,7 @@ public class VendaDTO {
 	
 	private Integer id;
 	private LocalDateTime momentoVenda;
+	@JsonIgnore
 	private List<Produtos> produto = new ArrayList<>();
 	private Vendedor vendedor;
 	private Set<ItensVenda> itensVenda = new HashSet<>();

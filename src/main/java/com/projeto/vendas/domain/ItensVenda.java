@@ -2,12 +2,17 @@ package com.projeto.vendas.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.deser.impl.ExternalTypeHandler.Builder;
 
 @Entity
 public class ItensVenda implements Serializable {
@@ -94,5 +99,24 @@ public class ItensVenda implements Serializable {
 		ItensVenda other = (ItensVenda) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNomeProduto());
+		builder.append(", Qte: ");
+		builder.append(getQuantidade());
+		builder.append(", Preço unitario: ");
+		builder.append(getPreco());
+		builder.append(", SubTotal: ");
+		builder.append(getSubTotal());
+		builder.append("\n");
+		return builder.toString();
+	}
+	
+	
+	
+	
 
 }
