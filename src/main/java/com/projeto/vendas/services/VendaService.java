@@ -10,12 +10,15 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projeto.vendas.domain.ItensVenda;
+import com.projeto.vendas.domain.ItensVendaPK;
 import com.projeto.vendas.domain.Produtos;
 import com.projeto.vendas.domain.Venda;
 import com.projeto.vendas.domain.Vendedor;
 import com.projeto.vendas.dto.ProdutosDTO;
 import com.projeto.vendas.dto.VendaDTO;
 import com.projeto.vendas.dto.VendaNewDTO;
+import com.projeto.vendas.repositories.ItensVendaRepository;
 import com.projeto.vendas.repositories.ProdutosRepository;
 import com.projeto.vendas.repositories.VendaRepository;
 
@@ -27,6 +30,9 @@ public class VendaService {
 
 	@Autowired
 	private ProdutosRepository proRepo;
+
+	@Autowired
+	private ItensVendaRepository itensVendaRepository;
 
 	public Venda find(Integer id) {
 		Optional<Venda> obj = repo.findById(id);
@@ -41,12 +47,15 @@ public class VendaService {
 		obj.getMomentoVenda();
 		Venda venda = new Venda(null, LocalDateTime.now(), vende);
 		repo.save(venda);
+		System.out.println(venda);
+
 		for (ProdutosDTO pro : obj.getProduto()) {
 			Produtos novo = new Produtos(pro);
 			novo.setVendas(venda);
 			proRepo.save(novo);
-		}	
-		System.out.println(venda);
+		}
+
+		System.out.println("Insert method: " + venda);
 		return venda;
 	}
 

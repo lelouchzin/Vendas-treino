@@ -28,6 +28,7 @@ public class Produtos implements Serializable {
 	private String nomeProduto;
 	private BigDecimal valorProduto;
 
+	@JsonIgnore
 	@ManyToOne
 	private Venda vendas;
 

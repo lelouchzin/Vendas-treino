@@ -37,8 +37,8 @@ public class VendaResource {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody VendaNewDTO objDto) {
 		Venda obj = service.insert(objDto);
-		System.out.println(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		System.out.println("Resource Post" + obj);
 		return ResponseEntity.created(uri).build();
 	}
 

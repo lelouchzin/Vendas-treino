@@ -1,7 +1,10 @@
 package com.projeto.vendas.dto;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.projeto.vendas.domain.ItensVenda;
 import com.projeto.vendas.domain.Produtos;
 
 public class ProdutosDTO {
@@ -9,7 +12,7 @@ public class ProdutosDTO {
 	private Integer id;
 	private String nomeProduto;
 	private BigDecimal valorProduto;
-	
+	private Set<ItensVenda> itens = new HashSet<>();
 
 	public ProdutosDTO() {
 	}
@@ -43,6 +46,14 @@ public class ProdutosDTO {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Set<ItensVenda> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItensVenda> itens) {
+		this.itens = itens;
 	}
 
 }

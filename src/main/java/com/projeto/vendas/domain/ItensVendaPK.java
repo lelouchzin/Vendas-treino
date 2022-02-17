@@ -10,14 +10,13 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class ItensVendaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@ManyToOne
-	@JoinColumn(name ="produto_id")
-	private Produtos produto;
-	
 
 	@ManyToOne
-	@JoinColumn(name="venda_id")
+	@JoinColumn(name = "produto_id")
+	private Produtos produto;
+
+	@ManyToOne
+	@JoinColumn(name = "venda_id")
 	private Venda venda;
 
 	public Produtos getProduto() {
@@ -52,6 +51,5 @@ public class ItensVendaPK implements Serializable {
 		ItensVendaPK other = (ItensVendaPK) obj;
 		return Objects.equals(produto, other.produto) && Objects.equals(venda, other.venda);
 	}
-	
-	
+
 }
