@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,18 @@ public class VendaService {
 		find(id);
 		repo.deleteById(id);
 	}
+	
+	public Venda update(@Valid VendaNewDTO objDto, Integer id) {
+		Venda venda = find(id);
+		for(ItensVenda iv : objDto.getItensVenda()) {
+			iv.setDesconto(iv.getDesconto());
+			iv.setProduto(produtoService.find(iv.getProduto().getId()));
+			iv.setPreco(iv.getProduto().getValorProduto());
+			iv.setVenda(venda);
+		}
+		itensVendaRepository.saveAll(objDto.getItensVenda());
+		return venda;
+	}
+
 
 }

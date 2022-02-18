@@ -54,5 +54,14 @@ public class VendaResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody VendaNewDTO objDto, @PathVariable Integer id) {
+		service.update(objDto, id);
+		return ResponseEntity.noContent().build();
+		
+		
+	}
 
 }
