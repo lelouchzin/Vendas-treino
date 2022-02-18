@@ -28,7 +28,7 @@ public class Produtos implements Serializable {
 	private String nomeProduto;
 	private BigDecimal valorProduto;
 
-	@JsonIgnore
+
 	@ManyToOne
 	private Venda venda;
 
@@ -94,6 +94,7 @@ public class Produtos implements Serializable {
 		this.valorProduto = valorProduto;
 	}
 
+	@JsonIgnore
 	public Venda getVendas() {
 		return venda;
 	}
