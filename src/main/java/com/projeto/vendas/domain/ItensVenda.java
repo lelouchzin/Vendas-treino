@@ -2,17 +2,12 @@ package com.projeto.vendas.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.deser.impl.ExternalTypeHandler.Builder;
 
 @Entity
 public class ItensVenda implements Serializable {
@@ -54,10 +49,20 @@ public class ItensVenda implements Serializable {
 	public Venda getVenda() {
 		return id.getVenda();
 	}
+	
+	public void setVenda(Venda venda) {
+		id.setVenda(venda);
+	}
 
 	public Produtos getProduto() {
 		return id.getProduto();
 	}
+	
+	public void setProduto(Produtos produto) {
+		id.setProduto(produto);
+	}
+	
+	
 
 	public BigDecimal getDesconto() {
 		return desconto;

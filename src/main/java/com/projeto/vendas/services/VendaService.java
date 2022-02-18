@@ -5,20 +5,16 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projeto.vendas.domain.Produtos;
+import com.projeto.vendas.domain.ItensVenda;
 import com.projeto.vendas.domain.Venda;
 import com.projeto.vendas.domain.Vendedor;
-import com.projeto.vendas.dto.ProdutosDTO;
-import com.projeto.vendas.dto.VendaDTO;
 import com.projeto.vendas.dto.VendaNewDTO;
 import com.projeto.vendas.repositories.ItensVendaRepository;
-import com.projeto.vendas.repositories.ProdutosRepository;
 import com.projeto.vendas.repositories.VendaRepository;
 
 @Service
@@ -28,10 +24,10 @@ public class VendaService {
 	private VendaRepository repo;
 
 	@Autowired
-	private ProdutosRepository proRepo;
+	private ItensVendaRepository itensVendaRepository;
 
 	@Autowired
-	private ItensVendaRepository itensVendaRepository;
+	private ProdutoService produtoService;
 
 	public Venda find(Integer id) {
 		Optional<Venda> obj = repo.findById(id);
@@ -46,13 +42,13 @@ public class VendaService {
 		obj.getMomentoVenda();
 		Venda venda = new Venda(null, LocalDateTime.now(), vende);
 		repo.save(venda);
-		System.out.println(venda);
-		for (ProdutosDTO pro : obj.getProduto()) {
-			Produtos novo = new Produtos(pro);
-			novo.setVendas(venda);
-			proRepo.save(novo);
+		for (ItensVenda iv : obj.getItensVenda()) {
+			iv.setDesconto(iv.getDesconto());
+			iv.setProduto(produtoService.find(iv.getProduto().getId()));
+			iv.setPreco(iv.getProduto().getValorProduto());
+			iv.setVenda(venda);
 		}
-		System.out.println("Insert: " + venda);
+		itensVendaRepository.saveAll(obj.getItensVenda());
 		return venda;
 	}
 
@@ -64,23 +60,5 @@ public class VendaService {
 		find(id);
 		repo.deleteById(id);
 	}
-
-	public Venda update(Venda obj) {
-		Venda newObj = find(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
-	}
-
-	private void updateData(Venda newObj, Venda obj) {
-		newObj.setItensVenda(obj.getItensVenda());
-		newObj.setProduto(obj.getProduto());
-	}
-
-
-	public Venda fromDTO(@Valid VendaDTO objDto) {
-		return new Venda(objDto.getId(), objDto.getMomentoVenda(), objDto.getVendedor());
-	}
-
-
 
 }

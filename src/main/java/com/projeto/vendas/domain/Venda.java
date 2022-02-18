@@ -30,7 +30,7 @@ public class Venda implements Serializable {
 	private LocalDateTime momentoVenda;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "venda", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "venda")
 	private List<Produtos> produto = new ArrayList<>();
 
 	
@@ -38,7 +38,7 @@ public class Venda implements Serializable {
 	@JoinColumn(name = "vendedor_id")
 	private Vendedor vendedor;
 
-	@OneToMany(mappedBy = "id.venda")
+	@OneToMany(mappedBy = "id.venda", cascade = CascadeType.ALL)
 	private Set<ItensVenda> itensVenda = new HashSet<>();
 
 	
