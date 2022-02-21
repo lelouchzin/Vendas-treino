@@ -119,9 +119,5 @@ public class ItensVenda implements Serializable {
 		builder.append("\n");
 		return builder.toString();
 	}
-	
-	
-	
-	
 
 }

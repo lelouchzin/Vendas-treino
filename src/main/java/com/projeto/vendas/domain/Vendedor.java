@@ -22,11 +22,11 @@ public class Vendedor implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nomeVendedor;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
 	private List<Venda> vendas = new ArrayList<>();
-	
+
 	public Vendedor() {
 	}
 
@@ -76,8 +76,5 @@ public class Vendedor implements Serializable {
 		Vendedor other = (Vendedor) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
+
 }

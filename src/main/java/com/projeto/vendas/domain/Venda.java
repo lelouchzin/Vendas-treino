@@ -33,15 +33,12 @@ public class Venda implements Serializable {
 	@OneToMany(mappedBy = "venda")
 	private List<Produtos> produto = new ArrayList<>();
 
-	
 	@ManyToOne
 	@JoinColumn(name = "vendedor_id")
 	private Vendedor vendedor;
 
 	@OneToMany(mappedBy = "id.venda", cascade = CascadeType.ALL)
 	private Set<ItensVenda> itensVenda = new HashSet<>();
-
-	
 
 	public Venda() {
 	}
@@ -124,8 +121,4 @@ public class Venda implements Serializable {
 				+ ", itensVenda=" + itensVenda + "]";
 	}
 
-	
-	
-	
-	
 }

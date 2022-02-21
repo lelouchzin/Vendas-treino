@@ -13,24 +13,22 @@ import com.projeto.vendas.domain.Venda;
 import com.projeto.vendas.domain.Vendedor;
 
 public class VendaDTO {
-	
+
 	private Integer id;
 	private LocalDateTime momentoVenda;
 	@JsonIgnore
 	private List<Produtos> produto = new ArrayList<>();
 	private Vendedor vendedor;
 	private Set<ItensVenda> itensVenda = new HashSet<>();
-	
+
 	public VendaDTO() {
 	}
-	
-	
+
 	public VendaDTO(Venda obj) {
 		id = obj.getId();
 		momentoVenda = obj.getMomentoVenda();
 		vendedor = obj.getVendedor();
 	}
-	
 
 	public Integer getId() {
 		return id;
@@ -71,8 +69,5 @@ public class VendaDTO {
 	public void setItensVenda(Set<ItensVenda> itensVenda) {
 		this.itensVenda = itensVenda;
 	}
-	
-	
-
 
 }
